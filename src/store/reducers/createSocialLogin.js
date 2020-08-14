@@ -10,7 +10,6 @@ export const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SOCIAL_LOGIN_SUCCESS:
-      console.log('1')
       return {
         ...state,
         user: action.user,
@@ -22,6 +21,5 @@ export default (state = initialState, action) => {
       }
     default:
       return state
-      console.log(state)
   }
 }
