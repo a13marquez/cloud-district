@@ -1,6 +1,6 @@
 import * as actions from './socialLoginActions'
 
-describe('socialLogin', () => {
+test('socialLogin', () => {
   expect(actions.loadAuthService('facebook', 1)).toEqual({
     type: actions.AUTH_SERVICE_LOAD,
     service: 'facebook',
