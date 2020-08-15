@@ -30,16 +30,19 @@ describe('SocialLoginButton', () => {
     socialLoginButton = mount(<SocialLoginButton text="test text" />)
     expect(socialLoginButton.props().text).toBe('test text')
     expect(
-      socialLoginButton.getDOMNode().querySelector('button-text').innerHTML
+      socialLoginButton.getDOMNode().querySelector('.button-text').innerHTML
     ).toBe('test text')
   })
   it('renders the image send by props', () => {
     socialLoginButton = mount(
-      <SocialLoginButton img='<img src="fake-src" />' />
+      <SocialLoginButton img={<img src="test-src" />} />
     )
-    expect(socialLoginButton.props().img).toBe('<img src="fake-src" />')
+
     expect(
-      socialLoginButton.getDOMNode().querySelector('button-img').innerHTML
-    ).toBe('<img src="fake-src" />')
+      socialLoginButton
+        .getDOMNode()
+        .querySelector('.button-img')
+        .querySelector('img')
+    ).toBeTruthy()
   })
 })

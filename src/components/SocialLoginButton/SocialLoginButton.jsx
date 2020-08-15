@@ -29,6 +29,11 @@ export const StyledSocialLoginButton = styled.button`
   }
 `
 
-const SocialLoginButton = () => <StyledSocialLoginButton />
+const SocialLoginButton = ({ text, img }) => (
+  <StyledSocialLoginButton>
+    <span className="button-text">{text}</span>
+    <span className="button-img">{img}</span>
+  </StyledSocialLoginButton>
+)
 
 export default SocialLoginButton
