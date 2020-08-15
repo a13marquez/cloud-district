@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects'
 import * as sagas from './sagas'
 import * as actions from '../actions/socialLoginActions'
 
-const profile = { getName: () => 'name' }
+const profile = { getName: () => 'name', getImageUrl: () => 'imgUrl' }
 const user = { getBasicProfile: () => profile }
 const auth2 = { signIn: () => user }
 window.gapi = {
@@ -40,7 +40,11 @@ test('googleLogin', () => {
     call([profile, profile.getName])
   )
   expect(generator.next('name').value).toEqual(
-    put(actions.socialLoginSuccess({ name: 'name' }))
+    call([profile, profile.getImageUrl])
+  )
+
+  expect(generator.next('imgUrl').value).toEqual(
+    put(actions.socialLoginSuccess({ name: 'name', picture: 'imgUrl' }))
   )
 })
 

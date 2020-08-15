@@ -26,7 +26,8 @@ export function* googleLogin({ scope = 'profile', ...options }) {
   const user = yield call([auth2, auth2.signIn], { scope, ...options })
   const profile = yield call([user, user.getBasicProfile])
   const name = yield call([profile, profile.getName])
-  yield put(actions.socialLoginSuccess({ name }))
+  const picture = yield call([profile, profile.getImageUrl])
+  yield put(actions.socialLoginSuccess({ name, picture }))
 }
 
 export function* watchAuthServiceLoadGoogle() {
