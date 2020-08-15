@@ -5,7 +5,7 @@ export const SOCIAL_LOGIN_SUCCESS = 'SOCIAL_LOGIN_SUCCESS'
 export const SOCIAL_LOGIN_FAILURE = 'SOCIAL_LOGIN_FAILURE'
 export const SOCIAL_LOGOUT = 'SOCIAL_LOGOUT'
 
-export const loadAuthService = (service, options) => ({
+export const authServiceLoad = (service, options) => ({
   type: AUTH_SERVICE_LOAD,
   service,
   options,
