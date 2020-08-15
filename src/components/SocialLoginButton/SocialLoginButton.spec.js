@@ -19,7 +19,7 @@ describe('SocialLoginButton', () => {
     expect(socialLoginButton).toHaveStyleRule('text-transform', 'uppercase')
     expect(socialLoginButton).toHaveStyleRule('padding', '0 48px')
     expect(socialLoginButton).toHaveStyleRule('min-height', '54px')
-    expect(socialLoginButton).toHaveStyleRule('letter-spacing', '.02em')
+    expect(socialLoginButton).toHaveStyleRule('letter-spacing', '0.02em')
     expect(socialLoginButton).toHaveStyleRule('font-weight', '600')
     expect(socialLoginButton).toHaveStyleRule('border-radius', '100px')
     expect(socialLoginButton).toHaveStyleRule('border-color', '#5c5c5c')
