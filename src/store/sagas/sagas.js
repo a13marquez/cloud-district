@@ -1,4 +1,4 @@
-import { call } from 'redux-saga/effects'
+import { call, all, take } from 'redux-saga/effects'
 
 export const loadScript = (src) =>
   new Promise((resolve, reject) => {
@@ -14,12 +14,17 @@ export const loadGoogleAuth2 = () =>
     window.gapi.load('auth2', resolve)
   })
 
-export function* loadGoogle({ clientId, ...options }) {
+export function* authServiceLoadGoogle({ clientId, ...options }) {
   yield call(loadScript, '//apis.google.com/js/platform.js')
   yield call(loadGoogleAuth2)
   yield call(window.gapi.auth2.init, { clientId, ...options })
 }
 
-export default function* rootSaga() {
-  yield all([loadGoogle()])
+export function* watchAuthServiceLoadGoogle() {
+  const { options } = yield take('AUTH_SERVICE_LOAD', 'google')
+  yield call(authServiceLoadGoogle, options)
+}
+
+export default function* sagas() {
+  yield all([watchAuthServiceLoadGoogle()])
 }

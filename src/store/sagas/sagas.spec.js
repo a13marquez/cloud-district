@@ -13,12 +13,24 @@ window.gapi = {
 }
 
 test('loadGoogle', () => {
-  const generator = sagas.loadGoogle({ client_id: 'test', foo: 'bar' })
+  const generator = sagas.authServiceLoadGoogle({
+    client_id: 'test',
+    foo: 'bar',
+  })
   expect(generator.next().value).toEqual(
     call(sagas.loadScript, '//apis.google.com/js/platform.js')
   )
   expect(generator.next().value).toEqual(call(sagas.loadGoogleAuth2))
   expect(generator.next().value).toEqual(
     call(window.gapi.auth2.init, { client_id: 'test', foo: 'bar' })
+  )
+})
+
+test('watchAuthServiceLoadGoogle', () => {
+  const payload = { options: 1 }
+  const generator = sagas.watchAuthServiceLoadGoogle()
+  generator.next()
+  expect(generator.next(payload).value).toEqual(
+    call(sagas.authServiceLoadGoogle, 1)
   )
 })
