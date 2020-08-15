@@ -37,12 +37,18 @@ describe('SocialLoginButton', () => {
     socialLoginButton = mount(
       <SocialLoginButton img={<img src="test-src" />} />
     )
-
     expect(
       socialLoginButton
         .getDOMNode()
         .querySelector('.button-img')
         .querySelector('img')
     ).toBeTruthy()
+  })
+
+  it('call click callback when its clicked', () => {
+    const clickCallback = jest.fn()
+    socialLoginButton = mount(<SocialLoginButton onClickCb={clickCallback} />)
+    socialLoginButton.simulate('click')
+    expect(clickCallback.mock.calls).toHaveLength(1)
   })
 })
