@@ -12,7 +12,10 @@ export default (state = initialState, action) => {
     case SOCIAL_LOGIN_SUCCESS:
       return {
         ...state,
-        user: action.user,
+        user: {
+          ...action.user,
+          loggedIn: true,
+        },
       }
     case SOCIAL_LOGOUT:
       return {

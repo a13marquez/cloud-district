@@ -1,8 +1,13 @@
 import { combineReducers } from 'redux'
-import socialLogin from './createDiscounts'
+import socialLogin from './createSocialLogin'
+import { connectRouter } from 'connected-react-router'
 
-const reducers = combineReducers({
-  socialLogin,
-})
+const reducers = (history) =>
+  combineReducers({
+    router: connectRouter(history),
+    socialLogin,
+  })
 
-export const getUser = (state) => state.user
+export const getUser = (state) => state.socialLogin.user
+
+export default reducers

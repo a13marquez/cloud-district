@@ -1,5 +1,10 @@
 import { call, all, take, put } from 'redux-saga/effects'
 import * as actions from '../actions/socialLoginActions'
+import { history } from '../configureStore'
+
+function forwardTo(location) {
+  history.replace(location)
+}
 
 export const loadScript = (src) =>
   new Promise((resolve, reject) => {
@@ -28,6 +33,7 @@ export function* googleLogin({ scope = 'profile', ...options }) {
   const name = yield call([profile, profile.getName])
   const picture = yield call([profile, profile.getImageUrl])
   yield put(actions.socialLoginSuccess({ name, picture }))
+  yield call(forwardTo, '/')
 }
 
 export function* watchAuthServiceLoadGoogle() {

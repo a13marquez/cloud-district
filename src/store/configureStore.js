@@ -1,17 +1,23 @@
 import { createStore, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
+import { routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from 'history'
+
 import sagas from './sagas/sagas'
 
 import reducers from './reducers'
 
+export const history = createBrowserHistory()
 const sagaMiddleware = createSagaMiddleware()
+
 export const configureStore = () => {
-  const middlewares = [sagaMiddleware]
+  const middlewares = [sagaMiddleware, routerMiddleware(history)]
   if (process.env.NODE_ENV !== 'production') {
     middlewares.push(createLogger())
   }
-  const store = createStore(reducers, applyMiddleware(...middlewares))
+
+  const store = createStore(reducers(history), applyMiddleware(...middlewares))
   sagaMiddleware.run(sagas)
   return store
 }
