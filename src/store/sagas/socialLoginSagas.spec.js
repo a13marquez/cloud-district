@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects'
-import * as sagas from './sagas'
+import * as sagas from './socialLoginSagas'
 import * as actions from '../actions/socialLoginActions'
 
 const profile = { getName: () => 'name', getImageUrl: () => 'imgUrl' }
