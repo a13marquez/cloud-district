@@ -1,13 +1,10 @@
 import React from 'react'
 
-import { connect } from 'react-redux'
-import { Route, Redirect, withRouter } from 'react-router-dom'
-
-const { getUser } = require('../../store/reducers')
+import { useSelector } from 'react-redux'
+import { Route, Redirect } from 'react-router-dom'
 
 function PrivateRoute({ children, ...rest }) {
-  const { user } = rest
-  debugger
+  const user = useSelector((state) => state.socialLogin.user)
   return (
     <Route
       {...rest}
@@ -22,8 +19,4 @@ function PrivateRoute({ children, ...rest }) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: getUser(state),
-})
-
-export default withRouter(connect(mapStateToProps, null)(PrivateRoute))
+export default PrivateRoute
