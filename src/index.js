@@ -10,11 +10,13 @@ import { ConnectedRouter as Router } from 'connected-react-router'
 const store = configureStore()
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <App />
-    </Router>
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <Router history={history}>
+        <App />
+      </Router>
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 )
 
