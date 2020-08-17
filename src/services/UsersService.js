@@ -7,4 +7,7 @@ export default {
   updateUserByID({ id, first_name, last_name, email }) {
     return apiClient.patch(`/users/${id}`, { first_name, last_name, email })
   },
+  getUserById(id) {
+    return apiClient.get(`/users/${id}`)
+  },
 }
