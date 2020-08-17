@@ -4,9 +4,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUsersByPage } from '../../store/actions/usersActions'
 import UserRow from '../../components/UserRow/UserRow'
 
+const StyledTableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  .table-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+`
+
 const StyledTable = styled.table`
   max-width: 1000px;
   margin: auto;
+  margin-bottom: 10px;
   border-collapse: collapse;
   tr {
     height: 40px;
@@ -39,7 +51,7 @@ const UsersTable = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <>
+    <StyledTableContainer>
       <StyledTable>
         <thead>
           <tr>
@@ -72,8 +84,12 @@ const UsersTable = () => {
         >
           {'<'}
         </button>
-        <span>
-          page {usersList && usersList.page} of
+        <span
+          style={{
+            padding: '0 10px',
+          }}
+        >
+          page {usersList && usersList.page} of {'  '}
           {usersList && usersList.total_pages}
         </span>
         <button
@@ -89,7 +105,7 @@ const UsersTable = () => {
           {'>>'}
         </button>
       </div>
-    </>
+    </StyledTableContainer>
   )
 }
 
