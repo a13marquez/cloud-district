@@ -7,13 +7,20 @@ import { Provider } from 'react-redux'
 import configureStore, { history } from './store/configureStore'
 import { ConnectedRouter as Router } from 'connected-react-router'
 
+const googleClientId =
+  '235504936120-gfbge9o62rcq8hmo1p0g99vm4ka6gd0t.apps.googleusercontent.com'
+
 const store = configureStore()
+
+export const GoogleClientIdContext = React.createContext(googleClientId)
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router history={history}>
-        <App />
+        <GoogleClientIdContext.Provider value={googleClientId}>
+          <App />
+        </GoogleClientIdContext.Provider>
       </Router>
     </Provider>
   </React.StrictMode>,

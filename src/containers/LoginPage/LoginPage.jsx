@@ -1,17 +1,14 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
-import { socialLoginrequest } from '../../store/actions/socialLoginActions'
+import { useDispatch } from 'react-redux'
+import * as actions from '../../store/actions/socialLoginActions'
 
 import SocialLoginButton from '../../components/SocialLoginButton/SocialLoginButton'
 import googleIcon from '../../assets/images/googleIcon.svg'
+import { useHistory } from 'react-router-dom'
+import LoginContainer from '../../components/StyledCenteredGrid/SyledCenteredGrid'
+import { GoogleClientIdContext } from '../..'
 
-const LoginContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: grid;
-  place-items: center;
-`
 const ButtonsContainer = styled.div`
   display: block;
   width: 440px;
@@ -22,7 +19,24 @@ const ButtonsContainer = styled.div`
   background-color: #ece9e5;
 `
 
-const LoginPage = ({ loginGoogle, history }) => {
+const LoginPage = () => {
+  useEffect(() => {
+    if (!window.gapi) {
+      initGoogle()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const googleClientId = useContext(GoogleClientIdContext)
+  const initGoogle = () =>
+    dispatch(
+      actions.authServiceLoad('google', {
+        clientId: googleClientId,
+      })
+    )
+  const loginGoogle = (history) => () =>
+    dispatch(actions.socialLoginrequest('google', {}))
   const img = <img src={googleIcon} alt="Google Icon" />
   return (
     <LoginContainer>
@@ -37,9 +51,4 @@ const LoginPage = ({ loginGoogle, history }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  loginGoogle: (history) => () =>
-    dispatch(socialLoginrequest('google', { history })),
-})
-
-export default connect(null, mapDispatchToProps)(LoginPage)
+export default LoginPage

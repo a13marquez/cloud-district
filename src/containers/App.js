@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import * as actions from '../store/actions/socialLoginActions'
 
@@ -8,9 +7,9 @@ import LoginPage from './LoginPage/LoginPage'
 import { Switch, Route } from 'react-router-dom'
 import PrivateRoute from './PrivateRouter/PrivateRoute'
 import NavBar from './NavBar/NavBar'
+import { Dashboard } from './Dashboard/Dasboard'
 
-const googleClientId =
-  '235504936120-gfbge9o62rcq8hmo1p0g99vm4ka6gd0t.apps.googleusercontent.com'
+import { GoogleClientIdContext } from '../index'
 
 function App() {
   useEffect(() => {
@@ -18,14 +17,13 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const dispatch = useDispatch()
-
+  const googleClientId = useContext(GoogleClientIdContext)
   const initGoogle = () =>
     dispatch(
       actions.authServiceLoad('google', {
         clientId: googleClientId,
       })
     )
-  const Hello = () => <div>hola</div>
 
   return (
     <div className="App">
@@ -33,15 +31,11 @@ function App() {
       <Switch>
         <Route exact path={'/login'} component={LoginPage} />
         <PrivateRoute exact path={'/'}>
-          <Hello />
+          <Dashboard />
         </PrivateRoute>
       </Switch>
     </div>
   )
-}
-
-App.propTypes = {
-  initGoogle: PropTypes.func.isRequired,
 }
 
 export default App
