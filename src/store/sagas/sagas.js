@@ -3,7 +3,7 @@ import {
   watchAuthServiceLoadGoogle,
   watchGoogleLogin,
 } from './socialLoginSagas'
-import { watchGetUsersRequest } from './usersSagas'
+import { watchGetUsersRequest, watchUpdateUserRequest } from './usersSagas'
 import { history } from '../configureStore'
 
 export function forwardTo(location) {
@@ -15,5 +15,6 @@ export default function* sagas() {
     watchAuthServiceLoadGoogle(),
     watchGoogleLogin(),
     watchGetUsersRequest(),
+    watchUpdateUserRequest(),
   ])
 }
