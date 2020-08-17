@@ -11,13 +11,17 @@ import reducers from './reducers'
 export const history = createBrowserHistory()
 const sagaMiddleware = createSagaMiddleware()
 
-export const configureStore = () => {
+export const configureStore = (initialState) => {
   const middlewares = [sagaMiddleware, routerMiddleware(history)]
   if (process.env.NODE_ENV !== 'production') {
     middlewares.push(createLogger())
   }
 
-  const store = createStore(reducers(history), applyMiddleware(...middlewares))
+  const store = createStore(
+    reducers(history),
+    initialState,
+    applyMiddleware(...middlewares)
+  )
   sagaMiddleware.run(sagas)
   return store
 }
