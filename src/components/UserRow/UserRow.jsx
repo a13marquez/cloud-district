@@ -86,7 +86,7 @@ const UserRow = ({ user }) => {
           <td>
             <button
               name="user-detail"
-              onClick={() => history.push(`user/${user.id}`)}
+              onClick={() => history.push(`users/${user.id}`)}
             >
               <FontAwesomeIcon icon={faIdCard} />
             </button>
