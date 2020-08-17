@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
-import cloudDistrictLogo from '../../assets/images/cloud-logo.png'
-import { useSelector } from 'react-redux'
 import UserInfo from '../UserInfo/UserInfo'
+import { socialLogout } from '../../store/actions/socialLoginActions'
+import cloudDistrictLogo from '../../assets/images/cloud-logo.png'
 
 const navBarHeight = '3em'
 
@@ -51,6 +52,7 @@ const StyledNavBar = styled.div`
 
 const NavBar = () => {
   const user = useSelector((state) => state.socialLogin.user)
+  const dispatch = useDispatch()
   return (
     <StyledNavBar>
       <div className="left-content">
@@ -64,7 +66,9 @@ const NavBar = () => {
           </li>
           <li>
             {user && user.loggedIn ? (
-              <Link to="/logout">Logout</Link>
+              <Link to="/" onClick={() => dispatch(socialLogout())}>
+                Logout
+              </Link>
             ) : (
               <Link to="/login">Login</Link>
             )}
