@@ -16,8 +16,7 @@ function App() {
   const history = useHistory()
   useEffect(() => {
     initGoogle()
-    if (checkLoggedIn()) {
-      debugger
+    if (checkLoggedIn()) {      
       const { name, picture } = JSON.parse(sessionStorage.getItem('userEntity'))
       dispatch(actions.socialLoginSuccess({ user: { name, picture } }))
       history.push('/users')

@@ -21,7 +21,6 @@ const UserCard = () => {
   useLayoutEffect(() => {
     const id = history.location.pathname.split('/')[2]
     const fetchUser = async (id) => {
-      debugger
       const { data } = await UsersService.getUserById(id)
       setUser(data.data)
     }
