@@ -62,7 +62,7 @@ const NavBar = () => {
       <div className="right-content">
         <ul className="tabs">
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/users">Dashboard</Link>
           </li>
           <li>
             {user && user.loggedIn ? (
