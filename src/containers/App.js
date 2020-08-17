@@ -7,7 +7,7 @@ import LoginPage from './LoginPage/LoginPage'
 import { Switch, Route } from 'react-router-dom'
 import PrivateRoute from './PrivateRouter/PrivateRoute'
 import NavBar from './NavBar/NavBar'
-import { Dashboard } from './Dashboard/Dasboard'
+import { Dashboard } from './Dashboard/Dashboard'
 
 import { GoogleClientIdContext } from '../index'
 
