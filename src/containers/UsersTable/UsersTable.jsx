@@ -48,6 +48,7 @@ const UsersTable = () => {
             <td>Last Name</td>
             <td>Email</td>
             <td></td>
+            <td></td>
           </tr>
         </thead>
         <tbody>

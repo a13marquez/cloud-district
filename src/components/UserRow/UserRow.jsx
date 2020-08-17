@@ -2,10 +2,14 @@ import React, { useState, useRef } from 'react'
 import RoundImage from '../RoundImage/Roundimage'
 import * as actions from '../../store/actions/usersActions'
 import { useDispatch } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faIdCard } from '@fortawesome/free-solid-svg-icons'
+import { useHistory } from 'react-router-dom'
 
 const UserRow = ({ user }) => {
   const [isEditing, setisEditing] = useState(false)
   const [userState, setuserState] = useState(user)
+  const history = useHistory()
   const dispatch = useDispatch()
   const idInput = useRef(user.id)
   const firstNameInput = useRef(user.first_name)
@@ -69,6 +73,7 @@ const UserRow = ({ user }) => {
               id="first-name-input"
             />
           </td>
+          <td></td>
           <td>
             <button onClick={saveData}>Save</button>
           </td>
@@ -78,6 +83,14 @@ const UserRow = ({ user }) => {
           <td>{userState.first_name}</td>
           <td>{userState.last_name}</td>
           <td>{userState.email}</td>
+          <td>
+            <button
+              name="user-detail"
+              onClick={() => history.push(`user/${user.id}`)}
+            >
+              <FontAwesomeIcon icon={faIdCard} />
+            </button>
+          </td>
           <td>
             <button onClick={() => setisEditing(true)}>Edit</button>
           </td>
