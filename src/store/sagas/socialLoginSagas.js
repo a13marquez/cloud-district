@@ -28,8 +28,16 @@ export function* googleLogin({ scope = 'profile', ...options }) {
   const profile = yield call([user, user.getBasicProfile])
   const name = yield call([profile, profile.getName])
   const picture = yield call([profile, profile.getImageUrl])
+  sessionStorage.setItem(
+    'userEntity',
+    JSON.stringify({
+      id: profile.getId(),
+      name,
+      picture,
+    })
+  )
   yield put(actions.socialLoginSuccess({ name, picture }))
-  yield call(forwardTo, '/')
+  yield call(forwardTo, '/users')
 }
 
 export function* watchAuthServiceLoadGoogle() {
