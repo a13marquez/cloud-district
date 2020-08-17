@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import * as actions from '../actions/usersActions'
-import { forwardTo } from './sagas'
 import UsersService from '../../services/UsersService'
 
 export function* getUsers({ pageNum }) {
@@ -10,7 +9,6 @@ export function* getUsers({ pageNum }) {
   } catch (error) {
     yield put({ type: 'FETCH_USER_LIST_FAILED', error })
   }
-  yield call(forwardTo, '/')
 }
 
 export function* updateUser(options) {
@@ -23,7 +21,6 @@ export function* updateUser(options) {
   } catch (error) {
     yield put({ type: 'UPDATE_USER_FAILED', error })
   }
-  yield call(forwardTo, '/')
 }
 
 export function* watchGetUsersRequest() {
