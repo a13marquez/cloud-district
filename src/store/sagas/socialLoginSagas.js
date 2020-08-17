@@ -16,12 +16,10 @@ export const loadGoogleAuth2 = () =>
     window.gapi.load('auth2', resolve)
   })
 
-export function* authServiceLoadGoogle(options) {
-  const googleClientId =
-    '235504936120-gfbge9o62rcq8hmo1p0g99vm4ka6gd0t.apps.googleusercontent.com'
+export function* authServiceLoadGoogle({ clientId, ...options }) {
   yield call(loadScript, '//apis.google.com/js/platform.js')
   yield call(loadGoogleAuth2)
-  yield call(window.gapi.auth2.init, { clientId: googleClientId, ...options })
+  yield call(window.gapi.auth2.init, { clientId, ...options })
 }
 
 export function* googleLogin({ scope = 'profile', ...options }) {
@@ -41,6 +39,5 @@ export function* watchAuthServiceLoadGoogle() {
 
 export function* watchGoogleLogin() {
   const { options } = yield take('SOCIAL_LOGIN_REQUEST', 'google')
-
   yield call(googleLogin, options)
 }
